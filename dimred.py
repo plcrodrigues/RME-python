@@ -31,8 +31,8 @@ class RDR(BaseEstimator, TransformerMixin):
         Which method should be used to reduce the dimension of the dataset.
         Different approaches use different cost functions and algorithms for
         solving the optimization problem. The options are:        
-            - nrme-uns
-            - nrme-uns-random (set nmeans, npoints)
+            - rme-uns
+            - rme-uns-bm (set nmeans, npoints)
             - covpca             
     '''
     
@@ -52,8 +52,8 @@ class RDR(BaseEstimator, TransformerMixin):
     def _fit(self, X, y):   
              
         methods = {
-                   'nrme-uns'        : dim_reduction_nrmeuns,
-                   'nrme-uns-random' : dim_reduction_nrmeuns_random,               
+                   'rme-uns'        : dim_reduction_nrmeuns,
+                   'rme-uns-bm' : dim_reduction_nrmeuns_random,               
                    'covpca'          : dim_reduction_covpca,                   
                   }    
                                    
@@ -99,7 +99,7 @@ def dim_reduction_nrmeuns_random(X, P, labels, params):
     nc = X.shape[1] 
     K  = X.shape[0]
     
-    nmeans = params['nmeans']
+    nmeans  = params['nmeans']
     npoints = params['npoints']
 
     # calculate the means

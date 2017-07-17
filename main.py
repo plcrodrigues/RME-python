@@ -89,15 +89,15 @@ pipelines['MDM'] = pipe
 
 # create classification pipeline with dimension reduction using RME
 mdm   = MDM(metric='riemann')
-rdr   = RDR(method='nrme-uns', n_components=P)
+rdr   = RDR(method='rme-uns', n_components=P)
 pipe  = make_pipeline(rdr, mdm)
 pipelines['RME + MDM'] = pipe
 
 # create classification pipeline with dimension reduction using RME-random
 mdm   = MDM(metric='riemann')
-rdr   = RDR(method='nrme-uns-random', n_components=P, params={'nmeans': 10, 'npoints': 5})
+rdr   = RDR(method='rme-uns-bm', n_components=P, params={'nmeans': 10, 'npoints': 5})
 pipe  = make_pipeline(rdr, mdm)
-pipelines['RME-random + MDM'] = pipe
+pipelines['bmRME + MDM'] = pipe
 
 scores = {}
 for pipename in pipelines:
